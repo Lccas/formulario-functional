@@ -1,13 +1,14 @@
 import './App.css';
-import { Fragment } from 'react';
 import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
+import { Container, Typography } from '@mui/material';
+import '@fontsource/roboto/300.css';
 
 function App() {
   return (
-    <Fragment>
-      <h1>Formulário de Cadastro</h1>
+    <Container component="article" maxWidth="sm">
+      <Typography variant='h3' component="h1" align="center">Formulário de Cadastro</Typography>
       <FormularioCadastro />
-    </Fragment>
+    </Container>
   );
 }
 

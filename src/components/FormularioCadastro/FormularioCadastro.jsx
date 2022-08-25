@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { TextField, Button, Switch, FormControlLabel } from '@mui/material';
 
-export default function FormularioCadastro() {
+export default function FormularioCadastro({aoEnviar}) {
 
     //const submit = () => {
     //    console.log('ai que demais')
     //}
 
-    let [nome, setNome] = useState("teste");
+    let [nome, setNome] = useState("");
     let [sobrenome, setSobrenome] = useState("");
     let [cpf, setCpf] = useState("");
-    //let promocoes = "";
-    //let novidades = "";
+    let [promocoes ,setPromocoes] = useState(true);
+    let [novidades ,setNovidades] = useState(false);
 
     return(
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                console.log(nome, sobrenome, cpf)
+                aoEnviar({nome, sobrenome, cpf, promocoes, novidades})
+                //console.log(nome, sobrenome, cpf, promocoes, novidades)
             }} 
         >
             <TextField 
@@ -55,15 +56,31 @@ export default function FormularioCadastro() {
 
             <FormControlLabel 
                 label="Promoções" 
-                control={<Switch name="promocoes" defaultChecked />}
+                control={<Switch 
+                    name="promocoes"
+                    checked={promocoes}
+                    onChange={(event)=>{
+                        setPromocoes(event.target.checked)
+                    }}
+                    //defaultChecked={promocoes}
+                />}
             />
 
             <FormControlLabel 
                 label="Novidades"
-                control={<Switch name="novidades" defaultChecked />} 
+                control={<Switch 
+                    name="novidades" 
+                    checked={novidades}
+                    onChange={(event)=>{
+                        setNovidades(event.target.checked)
+                    }}
+                    //defaultChecked={novidades} 
+                />} 
             />
 
-            <Button variant="text" type="submit">Text</Button>
+            <Button variant="text" type="submit">
+                Text
+            </Button>
         </form>
     )
 }

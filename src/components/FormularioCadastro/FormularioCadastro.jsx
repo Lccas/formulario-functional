@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { TextField, Button, Switch, FormControlLabel } from '@mui/material';
 
-export default function FormularioCadastro({aoEnviar}) {
-
-    //const submit = () => {
-    //    console.log('ai que demais')
-    //}
+export default function FormularioCadastro({aoEnviar, validarCPF}) {
 
     let [nome, setNome] = useState("");
     let [sobrenome, setSobrenome] = useState("");
     let [cpf, setCpf] = useState("");
     let [promocoes ,setPromocoes] = useState(true);
     let [novidades ,setNovidades] = useState(false);
+    const [erros, setErros] = useState({cpf:{valido:true, texto:""}})
 
     return(
         <form
@@ -47,6 +44,12 @@ export default function FormularioCadastro({aoEnviar}) {
                 onChange={(event) => {
                     setCpf(event.target.value);
                 }}
+                onBlur={(event)=>{
+                    const ehValido = validarCPF(cpf);
+                    setErros({cpf:ehValido});
+                }}
+                error={!erros.cpf.valido}
+                helperText={erros.cpf.texto}
                 value={cpf}
                 id="cpf" 
                 label="CPF"
